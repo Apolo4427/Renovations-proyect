@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Email;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -36,8 +37,8 @@ public class Cliente {
     private String contacto;
     @Column(
         nullable = false//indicamos que el email no puede ser nulo
-
     )
+    @Email(message = "El valor debe ser un correo electrónico válido")
     private String email;
     private String referido_por;
     private String fecha_estimado;
