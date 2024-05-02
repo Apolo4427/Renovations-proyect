@@ -1,5 +1,8 @@
 package com.renovations.jrl.apirestrenovations.Repositories;
 
+import java.util.List;
+import java.util.UUID;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,6 +26,12 @@ public class ClienteRepositoryTest {
                                             .build();
         
         clienteRepository.save(cliente);                                   
+    }
+
+    @Test
+    public void findByNameTest(){
+       List<Cliente> clientes = clienteRepository.findByNombre("Sergio");
+       System.out.println(clientes);
     }
 
 }

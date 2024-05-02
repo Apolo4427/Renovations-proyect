@@ -1,9 +1,9 @@
 package com.renovations.jrl.apirestrenovations.Entities;
 
-import java.util.UUID;
+// import java.util.UUID;
 
-import org.hibernate.annotations.GeneratorType;
-import org.hibernate.annotations.UuidGenerator;
+// import org.hibernate.annotations.ColumnTransformer;
+// import org.hibernate.annotations.UuidGenerator;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,9 +29,8 @@ import lombok.NoArgsConstructor;
 public class Cliente {
     
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @UuidGenerator(style = UuidGenerator.Style.RANDOM)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String nombre;
     private String direccion;
     private String contacto;
@@ -44,7 +43,7 @@ public class Cliente {
     private String fecha_estimado;
 
 
-    public Cliente(UUID id, String nombre, String direccion, String contacto, String email, String referido_por,
+    public Cliente(Long id, String nombre, String direccion, String contacto, String email, String referido_por,
             String fecha_estimado) {
         this.id = id;
         this.nombre = nombre;
