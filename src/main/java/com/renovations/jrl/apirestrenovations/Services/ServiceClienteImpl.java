@@ -16,14 +16,22 @@ public class ServiceClienteImpl implements ServicesCliente {
 
     @Override
     public Cliente actualizarCliente(Long id, Cliente cliente) {
-        
-        return null;
+        Cliente clienteSinActualizar = clienteRepository.findById(id).get();
+
+        clienteSinActualizar.setNombre(cliente.getNombre());
+        clienteSinActualizar.setEmail(cliente.getEmail());
+        clienteSinActualizar.setContacto(cliente.getContacto());
+        clienteSinActualizar.setDireccion(cliente.getDireccion());
+        clienteSinActualizar.setFecha_estimado(cliente.getFecha_estimado());
+        clienteSinActualizar.setReferido_por(cliente.getReferido_por());
+
+        return clienteRepository.save(clienteSinActualizar);
     }
 
     @Override
     public String eliminarCliente(Long id) {
         clienteRepository.deleteById(id);
-        return "El cliente con id: "+id+" ha sido eleiminado excitosamente.";
+        return "El cliente ha sido eleiminado excitosamente.";
     }
 
     @Override
@@ -41,5 +49,10 @@ public class ServiceClienteImpl implements ServicesCliente {
     public Cliente registrarCliente(Cliente cliente) {
         clienteRepository.save(cliente);
         return cliente;
+    }
+
+    @Override
+    public Cliente getClienteBYId(Long id) {
+        return clienteRepository.findById(id).get();
     }
 }

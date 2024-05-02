@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.renovations.jrl.apirestrenovations.Entities.Cliente;
@@ -27,9 +28,14 @@ public class ClienteController {
         return serviceClienteImpl.getAllClientes();
     }
 
-    @GetMapping("/clientes/{email}")
-    public Cliente findClientePorEmail(@PathVariable String email){
+    @GetMapping("/clientes/cliente")
+    public Cliente findClientePorEmail(@RequestParam String email){
         return serviceClienteImpl.getClienteByEmail(email);
+    }
+
+    @GetMapping("/clientes/id")
+    public Cliente findClientePorID(@RequestParam Long id){
+        return serviceClienteImpl.getClienteBYId(id);
     }
 
     //METODO POST
@@ -45,7 +51,7 @@ public class ClienteController {
     }
 
     //METODO DELETE
-    @DeleteMapping("/{id})")
+    @DeleteMapping("/eliminar/{id})")
     public String deleteCliente(@PathVariable Long id){
         return serviceClienteImpl.eliminarCliente(id);
     }

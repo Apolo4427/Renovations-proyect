@@ -10,4 +10,5 @@ public interface ServicesCliente {
     Cliente actualizarCliente(Long id, Cliente cliente);
     String eliminarCliente(Long id);
     Cliente getClienteByEmail(String email);
+    Cliente getClienteBYId(Long id);
 }
