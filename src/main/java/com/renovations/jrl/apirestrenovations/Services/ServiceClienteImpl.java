@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.renovations.jrl.apirestrenovations.Entities.Cliente;
 import com.renovations.jrl.apirestrenovations.Repositories.ClienteRepository;
+import com.renovations.jrl.apirestrenovations.error.ClienteNoFundException;
 
 @Service
 public class ServiceClienteImpl implements ServicesCliente {
@@ -16,7 +17,7 @@ public class ServiceClienteImpl implements ServicesCliente {
     ClienteRepository clienteRepository;
 
     @Override
-    public Cliente actualizarCliente(Long id, Cliente cliente) {
+    public Cliente actualizarCliente(Long id, Cliente cliente) throws ClienteNoFundException {
         Cliente clienteSinActualizar = clienteRepository.findById(id).get();
 
         clienteSinActualizar.setNombre(cliente.getNombre());
@@ -42,7 +43,7 @@ public class ServiceClienteImpl implements ServicesCliente {
     }
 
     @Override
-    public Cliente getClienteByEmail(String email) {
+    public Cliente getClienteByEmail(String email) throws ClienteNoFundException {
         return clienteRepository.findByEmail(email);
     }
 
@@ -53,7 +54,7 @@ public class ServiceClienteImpl implements ServicesCliente {
     }
 
     @Override
-    public Cliente getClienteBYId(Long id) {
+    public Cliente getClienteBYId(Long id) throws ClienteNoFundException {
         return clienteRepository.findById(id).get();
     }
 

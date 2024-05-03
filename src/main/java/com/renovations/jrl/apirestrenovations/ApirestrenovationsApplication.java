@@ -10,13 +10,4 @@ public class ApirestrenovationsApplication {
 		SpringApplication.run(ApirestrenovationsApplication.class, args);
 	}
 
-	// public class UUID {
-	//     public static void main(String[] arg){
-	//         System.out.println(newId());
-	//     }
-
-	//     public static String newId(){
-	//         return java.util.UUID.randomUUID().toString();
-	//     }
-	// }
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.renovations.jrl.apirestrenovations.Entities.Cliente;
 import com.renovations.jrl.apirestrenovations.Services.ServiceClienteImpl;
+import com.renovations.jrl.apirestrenovations.error.ClienteNoFundException;
 
 import jakarta.validation.Valid;
 
@@ -34,12 +35,12 @@ public class ClienteController {
     }
 
     @GetMapping("/clientes/email")
-    public Cliente findClientePorEmail(@RequestParam String email){
+    public Cliente findClientePorEmail(@RequestParam String email) throws ClienteNoFundException{
         return serviceClienteImpl.getClienteByEmail(email);
     }
 
     @GetMapping("/clientes/id")
-    public Cliente findClientePorID(@RequestParam Long id){
+    public Cliente findClientePorID(@RequestParam Long id) throws ClienteNoFundException{
         return serviceClienteImpl.getClienteBYId(id);
     }
 
@@ -51,7 +52,7 @@ public class ClienteController {
 
     //METODO PUT
     @PutMapping("/actualizar/{id}")
-    public Cliente updateCliente(@PathVariable Long id, @RequestBody Cliente cliente){
+    public Cliente updateCliente(@PathVariable Long id, @RequestBody Cliente cliente) throws ClienteNoFundException{
         return serviceClienteImpl.actualizarCliente(id, cliente);
     }
 
