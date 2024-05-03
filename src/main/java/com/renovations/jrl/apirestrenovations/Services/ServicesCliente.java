@@ -11,4 +11,5 @@ public interface ServicesCliente {
     String eliminarCliente(Long id);
     Cliente getClienteByEmail(String email);
     Cliente getClienteBYId(Long id);
+    List<String> getAllEmails();
 }

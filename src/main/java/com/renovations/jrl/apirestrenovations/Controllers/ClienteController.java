@@ -28,7 +28,12 @@ public class ClienteController {
         return serviceClienteImpl.getAllClientes();
     }
 
-    @GetMapping("/clientes/cliente")
+    @GetMapping("/clientes/emails")
+    public List<String> findAllEmails(){
+        return serviceClienteImpl.getAllEmails();
+    }
+
+    @GetMapping("/clientes/email")
     public Cliente findClientePorEmail(@RequestParam String email){
         return serviceClienteImpl.getClienteByEmail(email);
     }

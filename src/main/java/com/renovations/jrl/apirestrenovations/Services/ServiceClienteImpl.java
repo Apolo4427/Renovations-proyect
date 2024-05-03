@@ -1,5 +1,6 @@
 package com.renovations.jrl.apirestrenovations.Services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,5 +55,16 @@ public class ServiceClienteImpl implements ServicesCliente {
     @Override
     public Cliente getClienteBYId(Long id) {
         return clienteRepository.findById(id).get();
+    }
+
+    @Override
+    public List<String> getAllEmails(){
+        List<Cliente> listaClientes= clienteRepository.findAll();
+        List<String> emails = new ArrayList<String>();
+
+        for(Cliente cliente : listaClientes){
+            emails.add(cliente.getEmail());
+        }
+        return emails;
     }
 }
