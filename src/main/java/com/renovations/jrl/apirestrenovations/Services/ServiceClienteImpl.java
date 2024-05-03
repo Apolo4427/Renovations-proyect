@@ -5,10 +5,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.renovations.jrl.apirestrenovations.Entities.Cliente;
 import com.renovations.jrl.apirestrenovations.Repositories.ClienteRepository;
 import com.renovations.jrl.apirestrenovations.error.ClienteNoFundException;
+
+
 
 @Service
 public class ServiceClienteImpl implements ServicesCliente {
@@ -16,6 +19,7 @@ public class ServiceClienteImpl implements ServicesCliente {
     @Autowired
     ClienteRepository clienteRepository;
 
+    @Transactional
     @Override
     public Cliente actualizarCliente(Long id, Cliente cliente) throws ClienteNoFundException {
         Cliente clienteSinActualizar = clienteRepository.findById(id).get();
@@ -30,6 +34,7 @@ public class ServiceClienteImpl implements ServicesCliente {
         return clienteRepository.save(clienteSinActualizar);
     }
 
+    @Transactional
     @Override
     public String eliminarCliente(Long id) {
         clienteRepository.deleteById(id);
