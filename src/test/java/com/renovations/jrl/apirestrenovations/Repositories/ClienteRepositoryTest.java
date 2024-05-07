@@ -22,7 +22,6 @@ public class ClienteRepositoryTest {
                                             .contacto("3113742829")
                                             .email("top@gmail.com")
                                             .referido_por("Juanita")
-                                            .fecha_estimado("1/05/2024")
                                             .build();
         
         clienteRepository.save(cliente);                                   

@@ -1,5 +1,9 @@
 package com.renovations.jrl.apirestrenovations.Entities;
 
+import java.util.List;
+
+import jakarta.persistence.CascadeType;
+
 // import java.util.UUID;
 
 // import org.hibernate.annotations.ColumnTransformer;
@@ -7,9 +11,12 @@ package com.renovations.jrl.apirestrenovations.Entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.Email;
@@ -43,18 +50,26 @@ public class Cliente {
     @NotBlank(message = "Recuerda ingresar un valor de email.")
     private String email;
     private String referido_por;
-    private String fecha_estimado;
+
+
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER
+    )
+    @JoinColumn(//columna on la que se hara referencia
+        name="Cliente_id",
+        referencedColumnName= "id"
+    )
+    private List<Proyecto> proyectosList;
 
 
     public Cliente(Long id, String nombre, String direccion, String contacto, String email, String referido_por,
-            String fecha_estimado) {
-        this.id = id;
+            List<Proyecto> proyectosList) {
         this.nombre = nombre;
         this.direccion = direccion;
         this.contacto = contacto;
         this.email = email;
         this.referido_por = referido_por;
-        this.fecha_estimado = fecha_estimado;
     }
 
     

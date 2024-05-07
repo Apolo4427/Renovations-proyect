@@ -28,7 +28,6 @@ public class ServiceClienteImpl implements ServicesCliente {
         clienteSinActualizar.setEmail(cliente.getEmail());
         clienteSinActualizar.setContacto(cliente.getContacto());
         clienteSinActualizar.setDireccion(cliente.getDireccion());
-        clienteSinActualizar.setFecha_estimado(cliente.getFecha_estimado());
         clienteSinActualizar.setReferido_por(cliente.getReferido_por());
 
         return clienteRepository.save(clienteSinActualizar);
