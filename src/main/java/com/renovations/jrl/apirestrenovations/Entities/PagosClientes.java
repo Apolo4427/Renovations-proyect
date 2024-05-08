@@ -1,7 +1,7 @@
 package com.renovations.jrl.apirestrenovations.Entities;
 
-import java.util.HashMap;
-import java.util.Map;
+//import java.util.HashMap;
+//import java.util.Map;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
