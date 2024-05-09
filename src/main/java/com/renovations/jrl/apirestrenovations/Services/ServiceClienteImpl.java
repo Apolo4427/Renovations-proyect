@@ -72,4 +72,30 @@ public class ServiceClienteImpl implements ServicesCliente {
         }
         return emails;
     }
+
+    @Override
+    public List<String> getAllEamilsWithContrato() {
+        List<Cliente> listaClientes = clienteRepository.findAll();
+        List<String> emailsWithContrato = new ArrayList<String>();
+
+        for(Cliente cliente : listaClientes){
+            if(cliente.getProyectosList().size()>=1){
+                emailsWithContrato.add(cliente.getEmail());
+            }
+        }
+        return emailsWithContrato;
+    }
+
+    @Override
+    public List<String> getAllEmailsWtihOutContrato() {
+        List<Cliente> listaClientes = clienteRepository.findAll();
+        List<String> emailsWithContrato = new ArrayList<String>();
+
+        for(Cliente cliente : listaClientes){
+            if(cliente.getProyectosList().size()==0){
+                emailsWithContrato.add(cliente.getEmail());
+            }
+        }
+        return emailsWithContrato;
+    }
 }

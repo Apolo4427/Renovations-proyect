@@ -13,4 +13,6 @@ public interface ServicesCliente {
     Cliente getClienteByEmail(String email) throws ClienteNoFundException;
     Cliente getClienteBYId(Long id) throws ClienteNoFundException;
     List<String> getAllEmails();
+    List<String> getAllEamilsWithContrato();
+    List<String> getAllEmailsWtihOutContrato();
 }

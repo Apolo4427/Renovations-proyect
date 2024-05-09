@@ -29,6 +29,11 @@ public class ClienteController {
         return serviceClienteImpl.getAllClientes();
     }
 
+    @GetMapping("/clientes/emailsWithOutContrato")
+    public List<String> findEmailsWithOutContrato(){
+        return serviceClienteImpl.getAllEmailsWtihOutContrato();
+    }
+
     @GetMapping("/clientes/emailsWithContrato")
     public List<String> findEmailsWithContrato(){
         return serviceClienteImpl.getAllEamilsWithContrato();
