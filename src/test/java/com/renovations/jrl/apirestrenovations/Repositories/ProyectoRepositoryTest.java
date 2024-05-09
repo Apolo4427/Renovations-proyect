@@ -38,7 +38,10 @@ public class ProyectoRepositoryTest {
                                                                 .valorPagado("muchisimo")
                                                                 .build();
         
-        proyecto.setListaDePagosAliados(List.of(pagoAAliado));
+        List<PagosParaAliados> listaDePagos = proyecto.getListaDePagosAliados();
+        
+        listaDePagos.add(pagoAAliado);
+        proyecto.setListaDePagosAliados(listaDePagos);
         proyectoRepository.save(proyecto);
     }
 }
