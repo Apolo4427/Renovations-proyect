@@ -9,7 +9,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
@@ -57,9 +56,21 @@ public class Proyecto {
     private String documentos;
     private String facturas_de_marteriales;
 
+    //entidad compañia aliada
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+        name = "proyecto_id",
+        referencedColumnName = "proyectoId"
+    )
+    private List<PagosParaAliados> listaDePagosAliados;
+    //despues arreglo imagenes
+
     public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, String contratante,
             String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,
-            String documentos, String facturas_de_marteriales) {
+            String documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados) {
         this.numeroContrato = numero_contrato;
         this.fecha_estimado = fecha_estimado;
         this.fecha_inicio = fecha_inicio;
@@ -69,12 +80,11 @@ public class Proyecto {
         this.fechaDePago_velorAprovado = fechaDePago_velorAprovado;
         this.documentos = documentos;
         this.facturas_de_marteriales = facturas_de_marteriales;
+        this.listaDePagosAliados = lsitaPagosParaAliados;
 
     }
 
     
-    //entidad compañia aliada
-    //despues arreglo imagenes
 
        
 }

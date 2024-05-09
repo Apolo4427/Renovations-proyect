@@ -30,6 +30,4 @@ public class PagosParaAliados {
         this.facturasDePagos = facturasDePagos;
     }
 
-    
-
 }

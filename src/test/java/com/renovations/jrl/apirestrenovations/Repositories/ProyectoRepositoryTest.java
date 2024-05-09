@@ -25,6 +25,11 @@ public class ProyectoRepositoryTest {
         pagos.add(ultimoPago);
         proyecto.setListaDePagosClientes(pagos);
         proyectoRepository.save(proyecto);
+
+    }
+
+    @Test
+    public void testAddPagosparaAliados(){
         
     }
 }
