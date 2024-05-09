@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.renovations.jrl.apirestrenovations.Entities.PagosClientes;
+import com.renovations.jrl.apirestrenovations.Entities.PagosParaAliados;
 import com.renovations.jrl.apirestrenovations.Entities.Proyecto;
 
 @SpringBootTest
@@ -30,6 +31,14 @@ public class ProyectoRepositoryTest {
 
     @Test
     public void testAddPagosparaAliados(){
+        Proyecto proyecto = proyectoRepository.findByNumeroContrato("123");
+
+        PagosParaAliados pagoAAliado = PagosParaAliados.builder().compañiaAliada("los del barrio")
+                                                                .fechaDePago("16 de febrero")
+                                                                .valorPagado("muchisimo")
+                                                                .build();
         
+        proyecto.setListaDePagosAliados(List.of(pagoAAliado));
+        proyectoRepository.save(proyecto);
     }
 }

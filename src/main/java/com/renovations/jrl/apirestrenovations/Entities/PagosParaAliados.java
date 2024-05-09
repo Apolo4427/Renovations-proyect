@@ -18,12 +18,12 @@ public class PagosParaAliados {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long PagoParaAliadoId;
     private String compañiaAliada;
-    private Long valorPagado;
+    private String valorPagado;
     private String fechaDePago;
     private String facturasDePagos;
 
 
-    public PagosParaAliados(Long id, String compañiaAliada, Long valorPagado, String fechaDePago, String facturasDePagos) {
+    public PagosParaAliados(Long id, String compañiaAliada, String valorPagado, String fechaDePago, String facturasDePagos) {
         this.compañiaAliada = compañiaAliada;
         this.valorPagado = valorPagado;
         this.fechaDePago = fechaDePago;
