@@ -11,6 +11,9 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Builder;
 //import lombok.Builder;
 import lombok.Data;
@@ -20,11 +23,19 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Builder
+@Table(
+    uniqueConstraints = @UniqueConstraint(
+        name = "Numero de contrato unico",
+        columnNames = "numero_contrato"
+    )
+)
 public class Proyecto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long proyectoId;
+    @NotBlank(message = "Se debe indicar el numero del contrato.")
+    private String numeroContrato;
     private String fecha_estimado;//cuando iran a ver el proyecto a relizar 
     private String fecha_inicio;
     //antes arreglo imagenes (coleccion de String)
@@ -43,20 +54,19 @@ public class Proyecto {
 
 
     private String fechaDePago_velorAprovado;
-    private Long presupuesto_aprovado;
     private String documentos;
     private String facturas_de_marteriales;
 
-    public Proyecto(Long proyectoId, String fecha_estimado, String fecha_inicio, String contratante,
+    public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, String contratante,
             String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,
-            Long presupuesto_aprovado, String documentos, String facturas_de_marteriales) {
+            String documentos, String facturas_de_marteriales) {
+        this.numeroContrato = numero_contrato;
         this.fecha_estimado = fecha_estimado;
         this.fecha_inicio = fecha_inicio;
         this.contratante = contratante;
         this.valor_aprovado = valor_aprovado;
         this.listaDePagosClientes = listaDePagosClientes;
         this.fechaDePago_velorAprovado = fechaDePago_velorAprovado;
-        this.presupuesto_aprovado = presupuesto_aprovado;
         this.documentos = documentos;
         this.facturas_de_marteriales = facturas_de_marteriales;
 

@@ -40,13 +40,14 @@ public class ClienteRepositoryTest {
 
         PagosClientes pagos = PagosClientes.builder().fecha_pago("30 de enero").valor_pagado("un monton").build();
 
-        Proyecto proyecto = Proyecto.builder().contratante("Don Ramon")
-                                                .listaDePagosClientes(List.of(pagos)).build();
+        Proyecto proyecto = Proyecto.builder().numeroContrato("123")
+                                            .contratante("Don Ramon")
+                                            .listaDePagosClientes(List.of(pagos)).build();
 
         Cliente cliente = Cliente.builder().nombre("Sergio")
                                             .direccion("Carrea 40D sur 50")
                                             .contacto("3113742829")
-                                            .email("careloco1@gmail.com")
+                                            .email("careloco12@gmail.com")
                                             .referido_por("Juanita")
                                             .proyectosList(List.of(proyecto))
                                             .build();
@@ -58,6 +59,20 @@ public class ClienteRepositoryTest {
     public void findAllCleintesWithProyects(){
         List<Cliente> clientes = clienteRepository.findAll();
         System.out.println(clientes);
+    }
+
+    @Test
+    public void saveProyectoByCliente(){
+        Cliente cliente = clienteRepository.findByEmail("top152695@gmail.com");
+        
+        PagosClientes pagos = PagosClientes.builder().fecha_pago("30 de enero").valor_pagado("un monton").build();
+
+        Proyecto proyecto = Proyecto.builder().contratante("Don Ramon")
+                                                .listaDePagosClientes(List.of(pagos)).build();
+
+        cliente.setProyectosList(List.of(proyecto));
+        clienteRepository.save(cliente);
+        System.out.println(cliente);
     }
 
 
