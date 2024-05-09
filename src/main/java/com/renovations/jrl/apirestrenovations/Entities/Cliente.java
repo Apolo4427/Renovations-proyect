@@ -70,7 +70,7 @@ public class Cliente {
         this.contacto = contacto;
         this.email = email;
         this.referido_por = referido_por;
+        this.proyectosList=proyectosList;
     }
-
     
 }

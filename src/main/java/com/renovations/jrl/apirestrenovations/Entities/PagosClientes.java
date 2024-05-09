@@ -7,6 +7,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import lombok.Builder;
 //import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-//@Builder
+@Builder
 public class PagosClientes {
 
     @Id
@@ -24,7 +27,14 @@ public class PagosClientes {
     private String metodo_pago;
     private String valor_pagado;
     private String factura;
-    private String fecha_estimado;//cuando iran a ver el proyecto a relizar 
 
+
+    public PagosClientes(Long id, String fecha_pago, String metodo_pago, String valor_pagado, String factura) {
+        this.fecha_pago = fecha_pago;
+        this.metodo_pago = metodo_pago;
+        this.valor_pagado = valor_pagado;
+        this.factura = factura;
+    }
+     
     
 }
