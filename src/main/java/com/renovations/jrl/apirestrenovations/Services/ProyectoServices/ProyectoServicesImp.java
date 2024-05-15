@@ -3,12 +3,14 @@ package com.renovations.jrl.apirestrenovations.Services.ProyectoServices;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.renovations.jrl.apirestrenovations.Entities.Cliente;
 import com.renovations.jrl.apirestrenovations.Entities.Proyecto;
 import com.renovations.jrl.apirestrenovations.Repositories.ClienteRepository;
 import com.renovations.jrl.apirestrenovations.Repositories.ProyectoRepository;
 
+@Service
 public class ProyectoServicesImp implements ProyectoServices {
 
     @Autowired
