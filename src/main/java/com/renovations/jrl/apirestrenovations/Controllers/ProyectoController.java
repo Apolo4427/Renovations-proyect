@@ -63,4 +63,7 @@ public class ProyectoController {
 
     //metodo put para agregar documentos al proyecto
 
+    //metodo put para agregar imagenes del antes
+
+    //metodo put para agregar imagenes del despues
 }

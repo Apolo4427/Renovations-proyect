@@ -3,20 +3,22 @@ package com.renovations.jrl.apirestrenovations.Services.PagosClientesServices;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.renovations.jrl.apirestrenovations.Entities.PagosClientes;
 import com.renovations.jrl.apirestrenovations.Entities.Proyecto;
 import com.renovations.jrl.apirestrenovations.Repositories.ProyectoRepository;
 
+@Service
 public class PagosClientesServiceImp implements PagosClientesServices {
 
     @Autowired
     ProyectoRepository proyectoRepository;
 
     @Override
-    public List<PagosClientes> registrarPagoDelCliente(PagosClientes pago, String numeroContrato) {
+    public List<PagosClientes> registrarPagoDelCliente(PagosClientes pago, Long id) {
 
-        Proyecto proyecto = proyectoRepository.findByNumeroContrato(numeroContrato);
+        Proyecto proyecto = proyectoRepository.findByProyectoId(id);
         List<PagosClientes> listPagosCliente = proyecto.getListaDePagosClientes();
         listPagosCliente.add(pago);
         proyecto.setListaDePagosClientes(listPagosCliente);
@@ -42,6 +44,13 @@ public class PagosClientesServiceImp implements PagosClientesServices {
         proyecto.setListaDePagosClientes(listPagosClientes);
         proyectoRepository.save(proyecto);
         return listPagosClientes;
+    }
+
+    @Override
+    public List<PagosClientes> getAllPagosCliente(Long id) {
+        Proyecto proyecto = proyectoRepository.findByProyectoId(id);
+        List<PagosClientes> pagosCliente = proyecto.getListaDePagosClientes();
+        return pagosCliente;
     }
     
 }   
