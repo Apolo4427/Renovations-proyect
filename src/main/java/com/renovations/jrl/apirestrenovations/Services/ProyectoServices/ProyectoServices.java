@@ -10,4 +10,5 @@ public interface ProyectoServices {
     List<Proyecto> getAllProyectosClientesById(Long id);
     Proyecto getProyectoByNumeroContrato(String numeroContrato);
     Cliente registrarProyectoById(Proyecto proyecto, Long id);
+    Boolean validarProectoExistente(Proyecto proyecto);
 }

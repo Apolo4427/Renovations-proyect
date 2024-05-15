@@ -41,12 +41,18 @@ public class ProyectoController {
 
     //METODO POST
     @PostMapping("clientes/{id}/proyectos/nuevoProyecto")
-    public Proyecto saveProyecto(@RequestBody Proyecto proyecto, @PathVariable Long id){
-        Cliente cliente = proyectoServicesImp.registrarProyectoById(proyecto, id);
-        List<Proyecto> proyectosCliente = cliente.getProyectosList();
-        Proyecto proyectoGuardado = proyectosCliente.get(proyectosCliente.size()-1);
-        return proyectoGuardado;
-    }
+    public String saveProyecto(@RequestBody Proyecto proyecto, @PathVariable Long id){
+        
+        Boolean validarProyecto = proyectoServicesImp.validarProectoExistente(proyecto);
 
+        if(!validarProyecto){
+            Cliente cliente = proyectoServicesImp.registrarProyectoById(proyecto, id);
+            List<Proyecto> proyectosCliente = cliente.getProyectosList();
+            Proyecto proyectoGuardado = proyectosCliente.get(proyectosCliente.size()-1);
+            return "el proyecto se aguardado exitosamente. Se a guardado en el cliente con email: "+proyectoGuardado.getEmailCliente();
+        }
+        Proyecto proyectoExistente = proyectoServicesImp.getProyectoByNumeroContrato(proyecto.getNumeroContrato());
+        return "el numero de contrato que desas guardar ya existe en la base de datos de proyectos. y pertenece al cliente con email: "+proyectoExistente.getEmailCliente();
+    }
 
 }
