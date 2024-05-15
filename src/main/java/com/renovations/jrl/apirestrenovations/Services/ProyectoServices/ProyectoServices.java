@@ -8,4 +8,5 @@ public interface ProyectoServices {
     List<Proyecto> getAllProyectosClienteByEmail(String email);
     List<Proyecto> getAllProyectosClientesById(Long id);
     Proyecto getProyectoByNumeroContrato(String numeroContrato);
+    Proyecto registrarProyectoById(Proyecto proyecto, Long id);
 }

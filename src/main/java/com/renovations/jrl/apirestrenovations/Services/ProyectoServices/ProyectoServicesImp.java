@@ -38,4 +38,14 @@ public class ProyectoServicesImp implements ProyectoServices {
         return listaProyectos;
     }
 
+    @Override
+    public Proyecto registrarProyectoById(Proyecto proyecto, Long id) {
+        Cliente cliente = clienteRepository.findById(id).get();
+        List<Proyecto> listProyectos = cliente.getProyectosList();
+        listProyectos.add(proyecto);
+        cliente.setProyectosList(listProyectos);
+        clienteRepository.save(cliente);
+        return proyecto;
+    }
+
 }
