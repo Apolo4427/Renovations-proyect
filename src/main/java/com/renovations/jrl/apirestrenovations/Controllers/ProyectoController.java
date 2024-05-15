@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.renovations.jrl.apirestrenovations.Entities.Cliente;
 import com.renovations.jrl.apirestrenovations.Entities.Proyecto;
 import com.renovations.jrl.apirestrenovations.Services.ProyectoServices.ProyectoServicesImp;
 
@@ -18,13 +21,13 @@ public class ProyectoController {
     ProyectoServicesImp proyectoServicesImp;
 
     //METODOS GET
-    @GetMapping("/clientes/proyectos/{id}")
+    @GetMapping("/clientes/{id}/proyectos")
     public List<Proyecto> findAllProyectosById(@PathVariable Long id){
         List<Proyecto> listProyectos = proyectoServicesImp.getAllProyectosClientesById(id);
         return listProyectos;
     }
 
-    @GetMapping("/clientes/proyectos/email")
+    @GetMapping("/clientes/email/proyectos")
     public List<Proyecto> findAllProyectosByEmail(@RequestParam String email){
         List<Proyecto> listPoyectos = proyectoServicesImp.getAllProyectosClienteByEmail(email);
         return listPoyectos;
@@ -37,7 +40,13 @@ public class ProyectoController {
     }
 
     //METODO POST
-    
+    @PostMapping("clientes/{id}/proyectos/nuevoProyecto")
+    public Proyecto saveProyecto(@RequestBody Proyecto proyecto, @PathVariable Long id){
+        Cliente cliente = proyectoServicesImp.registrarProyectoById(proyecto, id);
+        List<Proyecto> proyectosCliente = cliente.getProyectosList();
+        Proyecto proyectoGuardado = proyectosCliente.get(proyectosCliente.size()-1);
+        return proyectoGuardado;
+    }
 
 
 }

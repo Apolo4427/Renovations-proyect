@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.renovations.jrl.apirestrenovations.Entities.Cliente;
+import com.renovations.jrl.apirestrenovations.Entities.Proyecto;
 import com.renovations.jrl.apirestrenovations.Repositories.ClienteRepository;
 import com.renovations.jrl.apirestrenovations.error.ClienteNoFundException;
 
@@ -29,6 +30,10 @@ public class ServiceClienteImpl implements ServicesCliente {
         clienteSinActualizar.setContacto(cliente.getContacto());
         clienteSinActualizar.setDireccion(cliente.getDireccion());
         clienteSinActualizar.setReferido_por(cliente.getReferido_por());
+        List<Proyecto> listProyectos = clienteSinActualizar.getProyectosList();
+        for (Proyecto proyecto : listProyectos) {
+            proyecto.setEmailCliente(cliente.getEmail());
+        }
 
         return clienteRepository.save(clienteSinActualizar);
     }

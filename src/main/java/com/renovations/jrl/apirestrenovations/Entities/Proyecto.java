@@ -39,6 +39,8 @@ public class Proyecto {
     private String fecha_inicio;
     //antes arreglo imagenes (coleccion de String)
     private String contratante;
+    @NotBlank(message = "Se debe indicar el correo del cliente.")
+    private String emailCliente;
     private String valor_aprovado;
 
     @OneToMany(//relacion uno a muchos con los pagos de los clientes
@@ -69,19 +71,19 @@ public class Proyecto {
     //despues arreglo imagenes
 
     public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, String contratante,
-            String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,
+            String emailCliente, String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,
             String documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados) {
         this.numeroContrato = numero_contrato;
         this.fecha_estimado = fecha_estimado;
         this.fecha_inicio = fecha_inicio;
         this.contratante = contratante;
+        this.emailCliente = emailCliente;
         this.valor_aprovado = valor_aprovado;
         this.listaDePagosClientes = listaDePagosClientes;
         this.fechaDePago_velorAprovado = fechaDePago_velorAprovado;
         this.documentos = documentos;
         this.facturas_de_marteriales = facturas_de_marteriales;
         this.listaDePagosAliados = lsitaPagosParaAliados;
-
     }
 
     
