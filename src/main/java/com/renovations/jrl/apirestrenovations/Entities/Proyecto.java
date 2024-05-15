@@ -55,7 +55,7 @@ public class Proyecto {
 
 
     private String fechaDePago_velorAprovado;
-    private String documentos;
+    private List<String> documentos;
     private String facturas_de_marteriales;
 
     //entidad compañia aliada
@@ -72,7 +72,7 @@ public class Proyecto {
 
     public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, String contratante,
             String emailCliente, String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,
-            String documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados) {
+            List<String> documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados) {
         this.numeroContrato = numero_contrato;
         this.fecha_estimado = fecha_estimado;
         this.fecha_inicio = fecha_inicio;

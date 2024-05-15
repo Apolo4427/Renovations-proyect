@@ -59,4 +59,27 @@ public class ProyectoServicesImp implements ProyectoServices {
         return cliente;
     }
 
+    @Override
+    public List<String> getAllDocumentos(String numeroContrato, Long id) {
+        if(!numeroContrato.isEmpty()){
+            Proyecto proyecto = proyectoRepository.findByNumeroContrato(numeroContrato);
+            return proyecto.getDocumentos();
+        }
+        if(id != null){
+            Proyecto proyecto = proyectoRepository.findByProyectoId(id);
+            return proyecto.getDocumentos();
+        }
+        return List.of("El proyecto no se ha encontrado paralos valores: ","Numero de contraro: "+numeroContrato,", id: "+String.valueOf(id));
+    }
+
+    @Override
+    public List<String> agregarDocumento(String documento, Long id) {
+        Proyecto proyecto = proyectoRepository.findByProyectoId(id);
+        List<String> documentos = proyecto.getDocumentos();
+        documentos.add(documento);
+        proyecto.setDocumentos(documentos);
+        proyectoRepository.save(proyecto);
+        return proyecto.getDocumentos();
+    }
+
 }

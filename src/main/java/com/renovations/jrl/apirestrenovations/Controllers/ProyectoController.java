@@ -39,6 +39,12 @@ public class ProyectoController {
         return proyecto;
     }
 
+    @GetMapping("clientes/proyecyos/{id}/documentos")
+    public List<String> findDocumentList(@PathVariable Long id){
+        List<String> documentos = proyectoServicesImp.getAllDocumentos(null, id);
+        return documentos;
+    }
+
     //METODO POST
     @PostMapping("clientes/{id}/proyectos/nuevoProyecto")
     public String saveProyecto(@RequestBody Proyecto proyecto, @PathVariable Long id){
@@ -54,5 +60,7 @@ public class ProyectoController {
         Proyecto proyectoExistente = proyectoServicesImp.getProyectoByNumeroContrato(proyecto.getNumeroContrato());
         return "el numero de contrato que desas guardar ya existe en la base de datos de proyectos. y pertenece al cliente con email: "+proyectoExistente.getEmailCliente();
     }
+
+    //metodo put para agregar documentos al proyecto
 
 }

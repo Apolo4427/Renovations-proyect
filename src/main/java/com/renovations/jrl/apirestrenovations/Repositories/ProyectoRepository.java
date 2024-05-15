@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 
 import com.renovations.jrl.apirestrenovations.Entities.Proyecto;
 
+
 @Repository
 public interface ProyectoRepository extends JpaRepository<Proyecto, Long> {
     Proyecto findByNumeroContrato(String numero_contrato);
+    Proyecto findByProyectoId(Long proyectoId);
 }
