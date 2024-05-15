@@ -13,6 +13,7 @@ public class ProyectoServicesImp implements ProyectoServices {
 
     @Autowired
     ProyectoRepository proyectoRepository;
+    @Autowired
     ClienteRepository   clienteRepository;
 
     @Override
