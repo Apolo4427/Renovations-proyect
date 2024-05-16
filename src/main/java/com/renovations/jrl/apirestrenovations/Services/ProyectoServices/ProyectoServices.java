@@ -9,7 +9,7 @@ public interface ProyectoServices {
     List<Proyecto> getAllProyectosClienteByEmail(String email);
     List<Proyecto> getAllProyectosClientesById(Long id);
     Proyecto getProyectoByNumeroContrato(String numeroContrato);
-    List<String> getAllDocumentos(String numeroContrato, Long id);
+    List<String> getAllDocumentos(Long id);
     Cliente registrarProyectoById(Proyecto proyecto, Long id);
     List<String> agregarDocumento(String documento, Long id);
     Boolean validarProectoExistente(Proyecto proyecto);

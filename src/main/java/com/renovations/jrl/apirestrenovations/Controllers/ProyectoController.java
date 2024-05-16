@@ -41,7 +41,7 @@ public class ProyectoController {
 
     @GetMapping("clientes/proyecyos/{id}/documentos")
     public List<String> findDocumentList(@PathVariable Long id){
-        List<String> documentos = proyectoServicesImp.getAllDocumentos(null, id);
+        List<String> documentos = proyectoServicesImp.getAllDocumentos(id);
         return documentos;
     }
 

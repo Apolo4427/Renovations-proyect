@@ -60,16 +60,12 @@ public class ProyectoServicesImp implements ProyectoServices {
     }
 
     @Override
-    public List<String> getAllDocumentos(String numeroContrato, Long id) {
-        if(!numeroContrato.isEmpty()){
-            Proyecto proyecto = proyectoRepository.findByNumeroContrato(numeroContrato);
-            return proyecto.getDocumentos();
-        }
+    public List<String> getAllDocumentos(Long id) {
         if(id != null){
             Proyecto proyecto = proyectoRepository.findByProyectoId(id);
             return proyecto.getDocumentos();
         }
-        return List.of("El proyecto no se ha encontrado paralos valores: ","Numero de contraro: "+numeroContrato,", id: "+String.valueOf(id));
+        return List.of("El proyecto no se ha encontrado paralos valores: ",", id: "+String.valueOf(id));
     }
 
     @Override
