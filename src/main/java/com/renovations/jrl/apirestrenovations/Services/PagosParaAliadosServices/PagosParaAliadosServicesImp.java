@@ -3,11 +3,13 @@ package com.renovations.jrl.apirestrenovations.Services.PagosParaAliadosServices
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.renovations.jrl.apirestrenovations.Entities.PagosParaAliados;
 import com.renovations.jrl.apirestrenovations.Entities.Proyecto;
 import com.renovations.jrl.apirestrenovations.Repositories.ProyectoRepository;
 
+@Service
 public class PagosParaAliadosServicesImp implements PagosParaAliadosServices {
 
     @Autowired
