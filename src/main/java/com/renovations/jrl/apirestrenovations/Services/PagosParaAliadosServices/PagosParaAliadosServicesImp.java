@@ -14,13 +14,13 @@ public class PagosParaAliadosServicesImp implements PagosParaAliadosServices {
     ProyectoRepository proyectoRepository;
 
     @Override
-    public List<PagosParaAliados> getAllPagosCliente(Long id) {
+    public List<PagosParaAliados> getAllPagosAliado(Long id) {
         Proyecto proyecto = proyectoRepository.findByProyectoId(id);
         return proyecto.getListaDePagosAliados();  
     }
 
     @Override
-    public List<PagosParaAliados> registrarPagoDelCliente(PagosParaAliados pago, Long id) {
+    public List<PagosParaAliados> registrarPagoDelAliado(PagosParaAliados pago, Long id) {
         Proyecto proyecto = proyectoRepository.findByProyectoId(id);
         List<PagosParaAliados> pagosAliados = proyecto.getListaDePagosAliados();
         pagosAliados.add(pago);
@@ -30,11 +30,19 @@ public class PagosParaAliadosServicesImp implements PagosParaAliadosServices {
     }
 
     @Override
-    public List<PagosParaAliados> actualizarPagoCliente(PagosParaAliados pago, String numeroContrato, Long id) {
+    public List<PagosParaAliados> actualizarPagoAliado(PagosParaAliados pago, String numeroContrato, Long id) {
         
         Proyecto proyecto = proyectoRepository.findByProyectoId(id);
-        //terminar codigo
-        return null;
+        List<PagosParaAliados> pagosParaAliadosList = proyecto.getListaDePagosAliados();
+        for(int i=0;i<pagosParaAliadosList.size();i++){
+            if(pagosParaAliadosList.get(i).getPagoParaAliadoId()==id){
+                pago.setPagoParaAliadoId(id);
+                pagosParaAliadosList.set(i, pago);
+            }
+        }
+        proyecto.setListaDePagosAliados(pagosParaAliadosList);
+        proyectoRepository.save(proyecto);
+        return pagosParaAliadosList;
     }
 
 }
