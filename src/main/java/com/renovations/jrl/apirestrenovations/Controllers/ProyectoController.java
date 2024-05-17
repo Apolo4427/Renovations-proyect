@@ -9,6 +9,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -94,17 +95,40 @@ public class ProyectoController {
     // }
 
     @PostMapping("/clientes/proyectos/{id}/documentos")
-    public ResponseEntity<Proyecto> subirDocumentos(@PathVariable Long id, @RequestParam("files") MultipartFile[] files) throws IOException {
-        Proyecto proyecto = proyectoRepository.findById(id).orElseThrow();
-        List<Filesproyecto> documentos = new ArrayList<>();
-        for (MultipartFile file : files) {
-            Filesproyecto nuevoArchivo = new Filesproyecto(null, file.getOriginalFilename(), file.getContentType(), file.getBytes());
-            documentos.add(filesproyectoRepository.save(nuevoArchivo));
+    @Transactional
+    public ResponseEntity<?> subirDocumentos(@PathVariable Long id, @RequestParam("files") MultipartFile[] files) {
+        try {
+            Proyecto proyecto = proyectoRepository.findById(id).orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+            List<Filesproyecto> documentos = new ArrayList<>();
+            List<String> errores = new ArrayList<>();
+
+            for (MultipartFile file : files) {
+                if (!"application/pdf".equals(file.getContentType())) {
+                    errores.add("El archivo " + file.getOriginalFilename() + " no es un PDF.");
+                    continue;
+                }
+                Filesproyecto nuevoArchivo = new Filesproyecto(null, file.getOriginalFilename(), file.getContentType(), file.getBytes());
+                documentos.add(filesproyectoRepository.save(nuevoArchivo));
+            }
+
+            if (!errores.isEmpty()) {
+                return new ResponseEntity<>(String.join("\n", errores), HttpStatus.BAD_REQUEST);
+            }
+
+            proyecto.setDocumentos(documentos);
+            proyectoRepository.save(proyecto);
+            return new ResponseEntity<>(proyecto, HttpStatus.OK);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error al leer los archivos: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseEntity<>("Error al subir los documentos: " + e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        proyecto.setDocumentos(documentos);
-        proyectoRepository.save(proyecto);
-        return new ResponseEntity<>(proyecto, HttpStatus.OK);
     }
+
+    
 
     @PostMapping("/cleintes/proyectos/{id}/imagenesAntes")
     public ResponseEntity<Proyecto> subirImagenesAntes(@PathVariable Long id, @RequestParam("files") MultipartFile[] files) throws IOException {
@@ -156,7 +180,8 @@ public class ProyectoController {
             .body(imagen.getData());
     }
 
-    @GetMapping("/{id}/imagenesAntes")
+    @GetMapping("/cleintes/proyectos/{id}/imagenesAntes")
+    @Transactional(readOnly = true)
     public ResponseEntity<List<String>> listarImagenesAntes(@PathVariable Long id) {
         Proyecto proyecto = proyectoRepository.findById(id).orElseThrow();
         List<String> imagenesAntesUrls = new ArrayList<>();
@@ -167,7 +192,8 @@ public class ProyectoController {
         return ResponseEntity.ok(imagenesAntesUrls);
     }
 
-    @GetMapping("/{id}/imagenesDespues")
+    @GetMapping("/cleintes/proyectos/{id}/imagenesDespues")
+    @Transactional(readOnly = true)
     public ResponseEntity<List<String>> listarImagenesDespues(@PathVariable Long id) {
         Proyecto proyecto = proyectoRepository.findById(id).orElseThrow();
         List<String> imagenesDespuesUrls = new ArrayList<>();
