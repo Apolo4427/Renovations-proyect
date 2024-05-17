@@ -37,7 +37,10 @@ public class Proyecto {
     private String numeroContrato;
     private String fecha_estimado;//cuando iran a ver el proyecto a relizar 
     private String fecha_inicio;
-    //antes arreglo imagenes (coleccion de String)
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ImagenesAntes> imagenesAntes;
+
     private String contratante;
     @NotBlank(message = "Se debe indicar el correo del cliente.")
     private String emailCliente;
@@ -55,7 +58,11 @@ public class Proyecto {
 
 
     private String fechaDePago_velorAprovado;
-    private List<String> documentos;
+
+    //documentos del proyecto
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Filesproyecto> documentos;
+
     private String facturas_de_marteriales;
 
     //entidad compañia aliada
@@ -68,15 +75,18 @@ public class Proyecto {
         referencedColumnName = "proyectoId"
     )
     private List<PagosParaAliados> listaDePagosAliados;
-    //despues arreglo imagenes
+    
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ImagenesDespues> imagenesDespues;
 
-    public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, String contratante,
+    public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, List<ImagenesAntes> imagenesAntes, String contratante,
             String emailCliente, String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,
-            List<String> documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados) {
+            List<Filesproyecto> documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados, List<ImagenesDespues> imagenesDespues) {
         this.numeroContrato = numero_contrato;
         this.fecha_estimado = fecha_estimado;
         this.fecha_inicio = fecha_inicio;
         this.contratante = contratante;
+        this.imagenesAntes = imagenesAntes;
         this.emailCliente = emailCliente;
         this.valor_aprovado = valor_aprovado;
         this.listaDePagosClientes = listaDePagosClientes;
@@ -84,6 +94,7 @@ public class Proyecto {
         this.documentos = documentos;
         this.facturas_de_marteriales = facturas_de_marteriales;
         this.listaDePagosAliados = lsitaPagosParaAliados;
+        this.imagenesDespues = imagenesDespues;
     }
 
     
