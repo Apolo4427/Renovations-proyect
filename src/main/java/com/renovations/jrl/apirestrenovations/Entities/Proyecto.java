@@ -48,7 +48,7 @@ public class Proyecto {
 
     @OneToMany(//relacion uno a muchos con los pagos de los clientes
         cascade = CascadeType.ALL,
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinColumn(
         name = "proyecto_id",
@@ -68,7 +68,7 @@ public class Proyecto {
     //entidad compañia aliada
     @OneToMany(
         cascade = CascadeType.ALL,
-        fetch = FetchType.EAGER
+        fetch = FetchType.LAZY
     )
     @JoinColumn(
         name = "proyecto_id",

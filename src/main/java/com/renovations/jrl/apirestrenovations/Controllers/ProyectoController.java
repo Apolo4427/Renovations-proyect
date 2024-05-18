@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.renovations.jrl.apirestrenovations.Entities.Cliente;
 import com.renovations.jrl.apirestrenovations.Entities.Filesproyecto;
@@ -27,6 +29,7 @@ import com.renovations.jrl.apirestrenovations.Repositories.FilesRepository;
 import com.renovations.jrl.apirestrenovations.Repositories.ImagenAntesRepository;
 import com.renovations.jrl.apirestrenovations.Repositories.ImagenDespuesRepository;
 import com.renovations.jrl.apirestrenovations.Repositories.ProyectoRepository;
+import com.renovations.jrl.apirestrenovations.Response.ResponseFile;
 import com.renovations.jrl.apirestrenovations.Services.ProyectoServices.ProyectoServicesImp;
 
 @RestController
@@ -163,6 +166,30 @@ public class ProyectoController {
             .header("Content-Disposition", "attachment; filename=\"" + file.getOriginalName() + "\"")
             .body(file.getData());
     }
+
+    @GetMapping("/clientes/proyectos/{id}/documentos")
+    @Transactional(readOnly = true)
+    public ResponseEntity<List<ResponseFile>> obtenerDocumentos(@PathVariable Long id) {
+        Proyecto proyecto = proyectoRepository.findById(id).orElseThrow(() -> new RuntimeException("Proyecto no encontrado"));
+
+        List<ResponseFile> responseFiles = proyecto.getDocumentos().stream().map(documento -> {
+            String fileUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                                                        .path("/clientes/proyectos/")
+                                                        .path(id.toString())
+                                                        .path("/documentos/")
+                                                        .path(documento.getId().toString())
+                                                        .toUriString();
+            return ResponseFile.builder()
+                            .name(documento.getOriginalName())
+                            .url(fileUrl)
+                            .type(documento.getType())
+                            .size((long) documento.getData().length)
+                            .build();
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(responseFiles);
+    }
+
 
     @GetMapping("/cleintes/proyectos/{id}/imagenesAntes/{imagenId}")
     public ResponseEntity<byte[]> descargarImagenAntes(@PathVariable Long id, @PathVariable UUID imagenId) {
