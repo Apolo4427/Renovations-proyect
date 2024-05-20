@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,37 +20,38 @@ import com.renovations.jrl.apirestrenovations.error.ClienteNoFundException;
 import jakarta.validation.Valid;
 
 @RestController
+@RequestMapping("/clientes")
 public class ClienteController {
     @Autowired
     ServiceClienteImpl serviceClienteImpl;
 
     //METODOS GET
-    @GetMapping("/clientes")
+    @GetMapping("/todos")
     public List<Cliente> findAllClientes(){
         return serviceClienteImpl.getAllClientes();
     }
 
-    @GetMapping("/clientes/emailsWithOutContrato")
+    @GetMapping("/emailsWithOutContrato")
     public List<String> findEmailsWithOutContrato(){
         return serviceClienteImpl.getAllEmailsWtihOutContrato();
     }
 
-    @GetMapping("/clientes/emailsWithContrato")
+    @GetMapping("/emailsWithContrato")
     public List<String> findEmailsWithContrato(){
         return serviceClienteImpl.getAllEamilsWithContrato();
     }
 
-    @GetMapping("/clientes/emails")
+    @GetMapping("/emails")
     public List<String> findAllEmails(){
         return serviceClienteImpl.getAllEmails();
     }
 
-    @GetMapping("/clientes/email")
+    @GetMapping("/email")
     public Cliente findClientePorEmail(@RequestParam String email) throws ClienteNoFundException{
         return serviceClienteImpl.getClienteByEmail(email);
     }
 
-    @GetMapping("/clientes/id")
+    @GetMapping("/id")
     public Cliente findClientePorID(@RequestParam Long id) throws ClienteNoFundException{
         return serviceClienteImpl.getClienteBYId(id);
     }

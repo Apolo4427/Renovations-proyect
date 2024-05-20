@@ -38,7 +38,6 @@ public class Proyecto {
     private String fecha_estimado;//cuando iran a ver el proyecto a relizar 
     private String fecha_inicio;
     //antes arreglo imagenes (coleccion de String)
-    
     private String contratante;
     @NotBlank(message = "Se debe indicar el correo del cliente.")
     private String emailCliente;
@@ -56,7 +55,16 @@ public class Proyecto {
 
 
     private String fechaDePago_velorAprovado;
-    private List<String> documentos;
+
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+        name = "proyecto_id",
+        referencedColumnName = "proyectoId"
+    )
+    private List<Documento> documentos;
     private String facturas_de_marteriales;
 
     //entidad compañia aliada
@@ -73,7 +81,7 @@ public class Proyecto {
 
     public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, String contratante,
             String emailCliente, String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,
-            List<String> documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados) {
+            List<Documento> documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados) {
         this.numeroContrato = numero_contrato;
         this.fecha_estimado = fecha_estimado;
         this.fecha_inicio = fecha_inicio;
