@@ -2,6 +2,7 @@ package com.renovations.jrl.apirestrenovations.Services.DocumentosServices;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,10 +31,28 @@ public class DocumentosServiceImp implements DocumentosServices {
         Documento documentoNuevo = Documento.builder().name(fileName)
                 .data(docmuento.getBytes()).build();//crear el documento nuevo
         documentos.add(documentoNuevo);//agregar el documento nuevo a la lista de documentos
-        proyecto.setDocumentos(documentos);
-        proyectoRepository.save(proyecto);
+        proyecto.setDocumentos(documentos);//setear la lista al proyecto 
+        proyectoRepository.save(proyecto);//guardar el proyecto
 
         return proyecto.getDocumentos().get(proyecto.getDocumentos().size()-1);//devolver el ultimo documento agregado al proyecto
+    }
+
+    @Override
+    public Documento getDocumento(UUID id, Long proyectoId) {
+        Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
+        List<Documento> documentos = proyecto.getDocumentos();
+        for (Documento documento : documentos) {
+            if(id.toString().equals(documento.getId().toString())){
+                return documento;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Documento> getAllDocumentos(Long proyectoId) {
+        Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
+        return proyecto.getDocumentos();
     }
 
 }
