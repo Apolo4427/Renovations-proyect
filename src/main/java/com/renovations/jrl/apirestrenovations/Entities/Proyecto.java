@@ -38,6 +38,7 @@ public class Proyecto {
     private String fecha_estimado;//cuando iran a ver el proyecto a relizar 
     private String fecha_inicio;
     //antes arreglo imagenes (coleccion de String)
+    
     private String contratante;
     @NotBlank(message = "Se debe indicar el correo del cliente.")
     private String emailCliente;
