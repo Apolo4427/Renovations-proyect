@@ -46,12 +46,14 @@ public class ServiceClienteImpl implements ServicesCliente {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Cliente> getAllClientes() {
         List<Cliente> clientes = clienteRepository.findAll();
         return clientes;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Cliente getClienteByEmail(String email) throws ClienteNoFundException {
         return clienteRepository.findByEmail(email);
     }
@@ -68,6 +70,7 @@ public class ServiceClienteImpl implements ServicesCliente {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<String> getAllEmails(){
         List<Cliente> listaClientes= clienteRepository.findAll();
         List<String> emails = new ArrayList<String>();
@@ -79,6 +82,7 @@ public class ServiceClienteImpl implements ServicesCliente {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<String> getAllEamilsWithContrato() {
         List<Cliente> listaClientes = clienteRepository.findAll();
         List<String> emailsWithContrato = new ArrayList<String>();
@@ -92,6 +96,7 @@ public class ServiceClienteImpl implements ServicesCliente {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<String> getAllEmailsWtihOutContrato() {
         List<Cliente> listaClientes = clienteRepository.findAll();
         List<String> emailsWithContrato = new ArrayList<String>();

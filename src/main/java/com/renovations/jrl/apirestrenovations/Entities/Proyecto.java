@@ -58,13 +58,14 @@ public class Proyecto {
 
     @OneToMany(
         cascade = CascadeType.ALL,
-        fetch = FetchType.LAZY
+        fetch = FetchType.EAGER
     )
     @JoinColumn(
         name = "proyecto_id",
         referencedColumnName = "proyectoId"
     )
     private List<Documento> documentos;
+
     private String facturas_de_marteriales;
 
     //entidad compañia aliada

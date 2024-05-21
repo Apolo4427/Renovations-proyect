@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.renovations.jrl.apirestrenovations.Entities.Cliente;
 import com.renovations.jrl.apirestrenovations.Entities.Proyecto;
@@ -19,6 +20,7 @@ public class ProyectoServicesImp implements ProyectoServices {
     ClienteRepository   clienteRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<Proyecto> getAllProyectosClienteByEmail(String email) {
         Cliente cliente = clienteRepository.findByEmail(email);
         List<Proyecto> listaProyectos = cliente.getProyectosList();
@@ -26,12 +28,14 @@ public class ProyectoServicesImp implements ProyectoServices {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Proyecto getProyectoByNumeroContrato(String numeroContrato) {
         Proyecto proyecto = proyectoRepository.findByNumeroContrato(numeroContrato);
         return proyecto;
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Proyecto> getAllProyectosClientesById(Long id) {
         Cliente cliente = clienteRepository.findById(id).get();
         List<Proyecto> listaProyectos = cliente.getProyectosList();

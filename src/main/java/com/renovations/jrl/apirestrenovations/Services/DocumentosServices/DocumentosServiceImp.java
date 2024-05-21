@@ -1,11 +1,13 @@
 package com.renovations.jrl.apirestrenovations.Services.DocumentosServices;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -38,7 +40,8 @@ public class DocumentosServiceImp implements DocumentosServices {
     }
 
     @Override
-    public Documento getDocumento(UUID id, Long proyectoId) {
+    @Transactional(readOnly = true)
+    public Documento getDocumento(UUID id, Long proyectoId) throws FileNotFoundException{
         Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
         List<Documento> documentos = proyecto.getDocumentos();
         for (Documento documento : documentos) {
@@ -46,10 +49,11 @@ public class DocumentosServiceImp implements DocumentosServices {
                 return documento;
             }
         }
-        return null;
+        throw new FileNotFoundException();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Documento> getAllDocumentos(Long proyectoId) {
         Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
         return proyecto.getDocumentos();

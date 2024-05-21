@@ -23,9 +23,9 @@ public class ProyectoController {
     ProyectoServicesImp proyectoServicesImp;
 
     //METODOS GET
-    @GetMapping("/{id}")
-    public List<Proyecto> findAllProyectosById(@PathVariable Long id){
-        List<Proyecto> listProyectos = proyectoServicesImp.getAllProyectosClientesById(id);
+    @GetMapping("/{clienteId}")
+    public List<Proyecto> findAllProyectosById(@PathVariable Long clienteId){
+        List<Proyecto> listProyectos = proyectoServicesImp.getAllProyectosClientesById(clienteId);
         return listProyectos;
     }
 
@@ -57,8 +57,6 @@ public class ProyectoController {
         Proyecto proyectoExistente = proyectoServicesImp.getProyectoByNumeroContrato(proyecto.getNumeroContrato());
         return "el numero de contrato que desas guardar ya existe en la base de datos de proyectos. y pertenece al cliente con email: "+proyectoExistente.getEmailCliente();
     }
-
-    //metodo put para agregar documentos al proyecto
 
     //metodo put para agregar imagenes del antes
 

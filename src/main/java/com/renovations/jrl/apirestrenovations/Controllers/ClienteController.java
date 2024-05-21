@@ -26,7 +26,7 @@ public class ClienteController {
     ServiceClienteImpl serviceClienteImpl;
 
     //METODOS GET
-    @GetMapping("/todos")
+    @GetMapping
     public List<Cliente> findAllClientes(){
         return serviceClienteImpl.getAllClientes();
     }
