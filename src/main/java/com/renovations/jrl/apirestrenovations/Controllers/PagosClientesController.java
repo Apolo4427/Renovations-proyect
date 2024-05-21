@@ -41,4 +41,6 @@ public class PagosClientesController {
     public List<PagosClientes> updatePago(@RequestBody PagosClientes pago, @RequestParam String numeroContrato, @RequestParam Long id){
         return pagosClientesServiceImp.actualizarPagoCliente(pago, numeroContrato, id);
     }
+
+    //metodo para agregar facturas
 }

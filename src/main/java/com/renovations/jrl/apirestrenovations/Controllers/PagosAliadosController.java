@@ -37,4 +37,6 @@ public class PagosAliadosController {
         return pagosParaAliadosServicesImp.actualizarPagoAliado(pago, numeroContrato, id);
     }
 
+    //metodo para agregar facturas
+
 }
