@@ -1,4 +1,4 @@
-package com.renovations.jrl.apirestrenovations.Response;
+package com.renovations.jrl.apirestrenovations.DTO;
 
 import lombok.Builder;
 import lombok.Data;
@@ -8,10 +8,8 @@ import lombok.Data;
 public class DcomuentoDto {
 
     private String name;
-    private String url;
-    public DcomuentoDto(String name, String url) {
+    public DcomuentoDto(String name) {
         this.name = name;
-        this.url = url;
     }
     
 }
