@@ -121,9 +121,5 @@ public class Proyecto {
         this.documentos = documentos;
         this.facturas_de_marteriales = facturas_de_marteriales;
         this.listaDePagosAliados = lsitaPagosParaAliados;
-    }
-
-    
-
-       
+    }    
 }
