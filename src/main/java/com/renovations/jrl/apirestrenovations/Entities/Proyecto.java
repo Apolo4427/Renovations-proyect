@@ -38,7 +38,15 @@ public class Proyecto {
     private String fecha_estimado;//cuando iran a ver el proyecto a relizar 
     private String fecha_inicio;
     
-    //imagenes antes
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+        name = "proyecto_id",
+        referencedColumnName = "proyectoId"
+    )
+    List<ImagenAntes> imagenesAntes;
 
     private String contratante;
     @NotBlank(message = "Se debe indicar el correo del cliente.")
@@ -68,8 +76,15 @@ public class Proyecto {
     )
     private List<Documento> documentos;
 
-
-    private String facturas_de_marteriales;
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+        name = "proyecto_id",
+        referencedColumnName = "proyectoId"
+    )
+    private List<FacturasMateriales> facturas_de_marteriales;
 
     //entidad compañia aliada
     @OneToMany(
@@ -82,11 +97,19 @@ public class Proyecto {
     )
     private List<PagosParaAliados> listaDePagosAliados;
     
-    //iamgenes despues
+    @OneToMany(
+        cascade = CascadeType.ALL,
+        fetch = FetchType.EAGER
+    )
+    @JoinColumn(
+        name = "proyecto_id",
+        referencedColumnName = "proyectoId"
+    )
+    List<ImagenDespues> imagenesDespues;
 
-    public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, String contratante,
-            String emailCliente, String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,
-            List<Documento> documentos, String facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados) {   
+    public Proyecto(Long proyectoId, String numero_contrato, String fecha_estimado, String fecha_inicio, List<ImagenAntes> imagenesAntes, String contratante,
+            String emailCliente, String valor_aprovado, List<PagosClientes> listaDePagosClientes, String fechaDePago_velorAprovado,List<Documento> documentos, 
+            List<FacturasMateriales> facturas_de_marteriales, List<PagosParaAliados> lsitaPagosParaAliados, List<ImagenDespues> imagenesDespues) {   
         this.numeroContrato = numero_contrato;
         this.fecha_estimado = fecha_estimado;
         this.fecha_inicio = fecha_inicio;
