@@ -5,11 +5,15 @@ import lombok.Data;
 
 @Data
 @Builder
-public class DcomuentoDto {
+public class DocumentoDto {
 
+    private String id;
     private String name;
-    public DcomuentoDto(String name) {
+    public DocumentoDto(String id, String name) {
+        this.id = id;
         this.name = name;
     }
+
+    public DocumentoDto(){}
     
 }

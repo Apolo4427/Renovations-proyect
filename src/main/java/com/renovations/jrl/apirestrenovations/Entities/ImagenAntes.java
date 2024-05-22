@@ -15,8 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @Builder
-public class FacturasMateriales {
-
+public class ImagenAntes {
        @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -24,7 +23,7 @@ public class FacturasMateriales {
     @Lob
     private byte[] data;
     
-    public FacturasMateriales(UUID id, String originalName, byte[] data) {
+    public ImagenAntes(UUID id, String originalName, byte[] data) {
         this.id = id;
         this.originalName = originalName;
         this.data = data;
