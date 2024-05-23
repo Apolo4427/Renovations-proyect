@@ -21,12 +21,14 @@ public class FacturasMateriales {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String originalName;
+    private String fecha;
     @Lob
     private byte[] data;
     
-    public FacturasMateriales(UUID id, String originalName, byte[] data) {
+    public FacturasMateriales(UUID id, String originalName,String fecha, byte[] data) {
         this.id = id;
         this.originalName = originalName;
+        this.fecha = fecha;
         this.data = data;
     }
 }

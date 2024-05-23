@@ -21,7 +21,7 @@ public class FacturaMaterialesServicesImp implements FacturasMaterialesServices{
     ProyectoRepository proyectoRepository;
 
     @Override
-    public FacturasMateriales cargarFacturasMateriales(MultipartFile facturaMaterial, Long proyectoId)
+    public FacturasMateriales cargarFacturasMateriales(MultipartFile facturaMaterial, Long proyectoId, String fecha)
             throws IOException {
         Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
         String orignalFilName = facturaMaterial.getOriginalFilename();
@@ -30,6 +30,7 @@ public class FacturaMaterialesServicesImp implements FacturasMaterialesServices{
         }
         List<FacturasMateriales> listFacturas= proyecto.getFacturas_de_marteriales();
         FacturasMateriales facturaNueva = FacturasMateriales.builder().originalName(orignalFilName)
+                .fecha(fecha)
                 .data(facturaMaterial.getBytes()).build();
         listFacturas.add(facturaNueva);
         proyecto.setFacturas_de_marteriales(listFacturas);
@@ -40,13 +41,13 @@ public class FacturaMaterialesServicesImp implements FacturasMaterialesServices{
 
     @Override
     @Transactional(readOnly = true)
-    public List<FacturasMateriales> getAllDocumentos(Long proyectoId) {
+    public List<FacturasMateriales> getAllFcturas(Long proyectoId) {
         Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
         return proyecto.getFacturas_de_marteriales();
     }
 
     @Override
-    public FacturasMateriales getDocumento(UUID id, Long proyectoId) throws FileNotFoundException {
+    public FacturasMateriales getFactura(UUID id, Long proyectoId) throws FileNotFoundException {
         Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
         List<FacturasMateriales> listFacturas = proyecto.getFacturas_de_marteriales();
         for (FacturasMateriales facturaMateriales : listFacturas) {

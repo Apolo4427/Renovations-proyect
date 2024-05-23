@@ -10,7 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.renovations.jrl.apirestrenovations.Entities.FacturasMateriales;
 
 public interface FacturasMaterialesServices {
-    FacturasMateriales cargarFacturasMateriales(MultipartFile facturaMaterial, Long proyectoId) throws IOException;
-     List<FacturasMateriales> getAllDocumentos (Long proyectoId);
-    FacturasMateriales getDocumento (UUID id, Long proyectoId) throws FileNotFoundException;
+    FacturasMateriales cargarFacturasMateriales(MultipartFile facturaMaterial, Long proyectoId, String fecha) throws IOException;
+     List<FacturasMateriales> getAllFcturas (Long proyectoId);
+    FacturasMateriales getFactura (UUID id, Long proyectoId) throws FileNotFoundException;
 }

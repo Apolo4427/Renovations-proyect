@@ -49,7 +49,7 @@ public class DocumentosController {
     public ResponseEntity<List<String>> getAllDocumentosNombres(@PathVariable Long proyectoId) {
         List<Documento> documentos = documentosServiceImp.getAllDocumentos(proyectoId);
         List<String> nombresDocumentos = documentos.stream()
-                .map(Documento::getName)
+                .map(Documento::getName)//equivalente a -> .map(doc -> doc.getName())
                 .collect(Collectors.toList());
         return ResponseEntity.ok(nombresDocumentos);
     }
