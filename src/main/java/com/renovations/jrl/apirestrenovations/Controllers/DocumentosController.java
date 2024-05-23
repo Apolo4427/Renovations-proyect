@@ -24,7 +24,7 @@ import com.renovations.jrl.apirestrenovations.Entities.Documento;
 import com.renovations.jrl.apirestrenovations.Services.DocumentosServices.DocumentosServiceImp;
 
 @RestController
-@RequestMapping("/clientes/proyecto")
+@RequestMapping("/clientes/proyectos")
 public class DocumentosController {
 
     @Autowired

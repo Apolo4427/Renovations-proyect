@@ -36,7 +36,7 @@ public class ImagenesAntesController {
         return ResponseEntity.ok(listImagenDTOs);
     }
 
-    @PostMapping()
+    @PostMapping("/{proyectoId}/nuevaImagenAntes")
     public ResponseEntity<String> cargarImagenAntes(@RequestParam("imagen") MultipartFile imagen, @PathVariable Long proyectoId) throws IOException{
         ImagenAntes imagenNueva = imagenAntesServicesImp.cargarImagenAntes(imagen, proyectoId);
         return ResponseEntity.ok("Se ha guardado la imagen con exito, con nombre: "+imagenNueva.getOriginalName());
