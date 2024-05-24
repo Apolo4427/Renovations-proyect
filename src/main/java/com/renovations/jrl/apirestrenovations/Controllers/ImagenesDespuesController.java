@@ -27,10 +27,10 @@ public class ImagenesDespuesController {
     ImagenDespuesServicesImp     imagenDespuesServicesImp;
 
     //Metodo GET
-    @GetMapping("/{ProyectoId}/imagenesDespues")
-    public ResponseEntity<List<ImagenDTO>> getAllImagenesDespues(@PathVariable Long imagenDespues){
+    @GetMapping("/{proyectoId}/imagenesDespues")
+    public ResponseEntity<List<ImagenDTO>> getAllImagenesDespues(@PathVariable Long proyectoId){
         
-        List<ImagenDespues> listImagenesDespues = imagenDespuesServicesImp.getAllImagenesDespues(imagenDespues);
+        List<ImagenDespues> listImagenesDespues = imagenDespuesServicesImp.getAllImagenesDespues(proyectoId);
         List<ImagenDTO> listImagenesDTO = listImagenesDespues.stream().map(imagen->{
             return new ImagenDTO(imagen.getOriginalName(), Base64.encodeBase64String(imagen.getData()));
         }).collect(Collectors.toList());
@@ -38,8 +38,8 @@ public class ImagenesDespuesController {
         return ResponseEntity.ok(listImagenesDTO);
     }
 
-    @PostMapping("/{ProyectoId}/nuevaImagenDespues")
-    public ResponseEntity<String> cargarImagenDespues(@PathVariable Long proyectoId, @RequestParam(name = "imagen") MultipartFile imagenDespues) throws IOException{
+    @PostMapping("/{proyectoId}/nuevaImagenDespues")
+    public ResponseEntity<String> cargarImagenDespues(@RequestParam(name = "imagen") MultipartFile imagenDespues, @PathVariable Long proyectoId) throws IOException{
         ImagenDespues nuevaImagen = imagenDespuesServicesImp.cargarImagenDespues(imagenDespues, proyectoId);
         return ResponseEntity.ok("La imagen se aguardado con exito, con nombre: "+nuevaImagen.getOriginalName());
     }
