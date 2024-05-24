@@ -23,6 +23,11 @@ public class ProyectoController {
     ProyectoServicesImp proyectoServicesImp;
 
     //METODOS GET
+    @GetMapping("/id/{proyectoId}")
+    public Proyecto getProyectoById(@PathVariable Long proyectoId){
+        return proyectoServicesImp.getProyectoById(proyectoId);
+    }
+
     @GetMapping("/{clienteId}")
     public List<Proyecto> findAllProyectosById(@PathVariable Long clienteId){
         List<Proyecto> listProyectos = proyectoServicesImp.getAllProyectosClientesById(clienteId);

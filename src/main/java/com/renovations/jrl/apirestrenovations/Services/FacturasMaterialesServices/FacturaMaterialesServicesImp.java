@@ -21,6 +21,7 @@ public class FacturaMaterialesServicesImp implements FacturasMaterialesServices{
     ProyectoRepository proyectoRepository;
 
     @Override
+    @Transactional
     public FacturasMateriales cargarFacturasMateriales(MultipartFile facturaMaterial, Long proyectoId, String fecha)
             throws IOException {
         Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
@@ -36,7 +37,7 @@ public class FacturaMaterialesServicesImp implements FacturasMaterialesServices{
         proyecto.setFacturas_de_marteriales(listFacturas);
         proyectoRepository.save(proyecto);
         
-        return proyecto.getFacturas_de_marteriales().get(proyecto.getFacturas_de_marteriales().size()-0);
+        return proyecto.getFacturas_de_marteriales().get(proyecto.getFacturas_de_marteriales().size()-1);
     }
 
     @Override

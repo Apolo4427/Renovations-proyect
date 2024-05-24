@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.renovations.jrl.apirestrenovations.Entities.ImagenAntes;
@@ -18,6 +19,7 @@ public class ImagenAntesServicesImp implements ImagenAntesServices{
     ProyectoRepository proyectoRepository;
 
     @Override
+    @Transactional
     public ImagenAntes cargarImagenAntes(MultipartFile imagenAntes, Long ProyectoId) throws IOException {
         Proyecto proyecto = proyectoRepository.findByProyectoId(ProyectoId);
         List<ImagenAntes> listImagenes = proyecto.getImagenesAntes();
@@ -30,6 +32,7 @@ public class ImagenAntesServicesImp implements ImagenAntesServices{
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<ImagenAntes> getAllImagenesAntes(Long proyectoId) {
         Proyecto proyecto = proyectoRepository.findByProyectoId(proyectoId);
         return proyecto.getImagenesAntes();

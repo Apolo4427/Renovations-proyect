@@ -22,6 +22,7 @@ public class DocumentosServiceImp implements DocumentosServices {
     ProyectoRepository proyectoRepository;
 
     @Override
+    @Transactional
     public Documento cargarDocumento(MultipartFile docmuento, Long id) throws IOException {
         Proyecto proyecto = proyectoRepository.findByProyectoId(id);
         String orignalFilName = docmuento.getOriginalFilename();

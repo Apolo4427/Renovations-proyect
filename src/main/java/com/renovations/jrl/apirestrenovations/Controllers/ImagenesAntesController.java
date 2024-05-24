@@ -26,6 +26,7 @@ public class ImagenesAntesController {
     @Autowired
     ImagenAntesServicesImp imagenAntesServicesImp;
 
+    //Metodo Get
     @GetMapping("/{proyectoId}/imagenesAntes")
     public ResponseEntity<List<ImagenDTO>> findAllImagenesAntes(@PathVariable Long proyectoId){
         List<ImagenAntes> lisImagenes = imagenAntesServicesImp.getAllImagenesAntes(proyectoId);
@@ -36,6 +37,7 @@ public class ImagenesAntesController {
         return ResponseEntity.ok(listImagenDTOs);
     }
 
+    //Metodo Post
     @PostMapping("/{proyectoId}/nuevaImagenAntes")
     public ResponseEntity<String> cargarImagenAntes(@RequestParam("imagen") MultipartFile imagen, @PathVariable Long proyectoId) throws IOException{
         ImagenAntes imagenNueva = imagenAntesServicesImp.cargarImagenAntes(imagen, proyectoId);

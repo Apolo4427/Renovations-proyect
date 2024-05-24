@@ -19,6 +19,11 @@ public class ProyectoServicesImp implements ProyectoServices {
     @Autowired
     ClienteRepository   clienteRepository;
 
+    @Transactional(readOnly = true)
+    public Proyecto getProyectoById(Long proyectoId){
+        return proyectoRepository.findByProyectoId(proyectoId);
+    }
+
     @Override
     @Transactional(readOnly = true)
     public List<Proyecto> getAllProyectosClienteByEmail(String email) {
