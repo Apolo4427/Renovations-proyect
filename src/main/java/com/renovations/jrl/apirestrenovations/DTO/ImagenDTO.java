@@ -1,6 +1,9 @@
 package com.renovations.jrl.apirestrenovations.DTO;
 
-public class ImagenDTO {
+import java.io.Serializable;
+
+
+public class ImagenDTO implements Serializable {
     private String name;
     private String base64Data;
 

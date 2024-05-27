@@ -51,8 +51,8 @@ public class ClienteController {
         return serviceClienteImpl.getClienteByEmail(email);
     }
 
-    @GetMapping("/id")
-    public Cliente findClientePorID(@RequestParam Long id) throws ClienteNoFundException{
+    @GetMapping("/{id}")
+    public Cliente findClientePorID(@PathVariable Long id) throws ClienteNoFundException{
         return serviceClienteImpl.getClienteBYId(id);
     }
 
