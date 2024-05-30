@@ -69,7 +69,7 @@ public class ClienteController {
     }
 
     //METODO DELETE
-    @DeleteMapping("/eliminar/{id})")
+    @DeleteMapping("/eliminar/{id}")
     public String deleteCliente(@PathVariable Long id){
         return serviceClienteImpl.eliminarCliente(id);
     }

@@ -33,7 +33,7 @@ public class ProyectoRepositoryTest {
     public void testAddPagosparaAliados(){
         Proyecto proyecto = proyectoRepository.findByNumeroContrato("123");
 
-        PagosParaAliados pagoAAliado = PagosParaAliados.builder().compañiaAliada("los del barrio")
+        PagosParaAliados pagoAAliado = PagosParaAliados.builder().empresaAliada("los del barrio")
                                                                 .fechaDePago("16 de febrero")
                                                                 .valorPagado("muchisimo")
                                                                 .build();

@@ -23,7 +23,7 @@ public class ProyectoController {
     ProyectoServicesImp proyectoServicesImp;
 
     //METODOS GET
-    @GetMapping("/id/{proyectoId}")
+    @GetMapping("/{proyectoId}")
     public Proyecto getProyectoById(@PathVariable Long proyectoId){
         return proyectoServicesImp.getProyectoById(proyectoId);
     }
