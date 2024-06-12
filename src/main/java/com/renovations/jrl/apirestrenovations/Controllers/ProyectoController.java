@@ -3,7 +3,9 @@ package com.renovations.jrl.apirestrenovations.Controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -62,7 +64,12 @@ public class ProyectoController {
         return "el numero de contrato que desas guardar ya existe en la base de datos de proyectos. y pertenece al cliente con email: "+proyectoExistente.getEmailCliente();
     }
 
-    //metodo put para agregar imagenes del antes
+    //METODO PUT
+    @PatchMapping("/{proyectoId}/editarProyecto")
+    public ResponseEntity<String> upDateProyecto(@PathVariable Long proyectoId, @RequestBody Proyecto proyecto){
+        proyectoServicesImp.actualizarProyecto(proyecto, proyectoId);
+        return ResponseEntity.ok("El proyecto se actualizado exitosamente");
+    }
 
 
 }

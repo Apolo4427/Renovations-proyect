@@ -13,5 +13,6 @@ public interface ProyectoServices {
     Cliente registrarProyectoById(Proyecto proyecto, Long id);
     //List<String> agregarDocumento(String documento, Long id);
     Boolean validarProectoExistente(Proyecto proyecto);
+    Proyecto actualizarProyecto(Proyecto proyecto, Long proyectoId);
 
 }

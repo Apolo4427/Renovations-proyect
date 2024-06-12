@@ -68,6 +68,20 @@ public class ProyectoServicesImp implements ProyectoServices {
         return cliente;
     }
 
+    @Override
+    public Proyecto actualizarProyecto(Proyecto proyecto, Long proyectoId) {
+        Proyecto proyectoSinActualizar = proyectoRepository.findByProyectoId(proyectoId);
+        
+        proyectoSinActualizar.setFecha_estimado(proyecto.getFecha_estimado());
+        proyectoSinActualizar.setFecha_inicio(proyecto.getFecha_inicio());
+        proyectoSinActualizar.setContratante(proyecto.getContratante());
+        proyectoSinActualizar.setValor_aprovado(proyecto.getValor_aprovado());
+        proyectoSinActualizar.setFechaDePago_velorAprovado(proyecto.getFechaDePago_velorAprovado());
+
+        proyectoRepository.save(proyectoSinActualizar);
+        return proyectoSinActualizar;
+    }
+
     // @Override
     // public List<String> getAllDocumentos(Long id) {
     //     if(id != null){
