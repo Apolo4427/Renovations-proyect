@@ -25,11 +25,22 @@ public class ServiceClienteImpl implements ServicesCliente {
     public Cliente actualizarCliente(Long id, Cliente cliente) throws ClienteNoFundException {
         Cliente clienteSinActualizar = clienteRepository.findById(id).get();
 
-        clienteSinActualizar.setNombre(cliente.getNombre());
-        clienteSinActualizar.setEmail(cliente.getEmail());
-        clienteSinActualizar.setContacto(cliente.getContacto());
-        clienteSinActualizar.setDireccion(cliente.getDireccion());
-        clienteSinActualizar.setReferido_por(cliente.getReferido_por());
+        if(cliente.getNombre()!=null && !cliente.getNombre().isEmpty()){
+            clienteSinActualizar.setNombre(cliente.getNombre());
+        }
+        if(cliente.getEmail()!=null && !cliente.getEmail().isEmpty()){
+            clienteSinActualizar.setEmail(cliente.getEmail());
+        }
+        if(cliente.getContacto()!=null && !cliente.getContacto().isEmpty()){
+            clienteSinActualizar.setContacto(cliente.getContacto());
+        }
+        if(cliente.getDireccion()!=null && !cliente.getDireccion().isEmpty()){
+            clienteSinActualizar.setDireccion(cliente.getDireccion());
+        }
+        if(cliente.getReferido_por()!=null && !cliente.getReferido_por().isEmpty()){
+            clienteSinActualizar.setReferido_por(cliente.getReferido_por());
+        }
+        
         List<Proyecto> listProyectos = clienteSinActualizar.getProyectosList();
         for (Proyecto proyecto : listProyectos) {
             proyecto.setEmailCliente(cliente.getEmail());
