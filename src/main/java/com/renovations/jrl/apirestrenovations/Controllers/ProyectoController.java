@@ -25,59 +25,77 @@ import com.renovations.jrl.apirestrenovations.Services.ProyectoServices.Proyecto
 @RequestMapping("/clientes/proyectos")
 public class ProyectoController {
 
-    @Autowired 
+    @Autowired
     ProyectoServicesImp proyectoServicesImp;
 
-    //METODOS GET
+    // METODOS GET
     @GetMapping("/{proyectoId}")
-    public Proyecto getProyectoById(@PathVariable Long proyectoId){
+    public Proyecto getProyectoById(@PathVariable Long proyectoId) {
         return proyectoServicesImp.getProyectoById(proyectoId);
     }
 
     @GetMapping("/list/{clienteId}")
-    public List<Proyecto> findAllProyectosById(@PathVariable Long clienteId){
+    public List<Proyecto> findAllProyectosById(@PathVariable Long clienteId) {
         List<Proyecto> listProyectos = proyectoServicesImp.getAllProyectosClientesById(clienteId);
         return listProyectos;
     }
 
     @GetMapping("/email")
-    public List<Proyecto> findAllProyectosByEmail(@RequestParam String email){
+    public List<Proyecto> findAllProyectosByEmail(@RequestParam String email) {
         List<Proyecto> listPoyectos = proyectoServicesImp.getAllProyectosClienteByEmail(email);
         return listPoyectos;
     }
 
     @GetMapping("/contrato")
-    public Proyecto findProyectoByNumeroContrato(@RequestParam String numeroContrato){
+    public Proyecto findProyectoByNumeroContrato(@RequestParam String numeroContrato) {
         Proyecto proyecto = proyectoServicesImp.getProyectoByNumeroContrato(numeroContrato);
         return proyecto;
     }
-    
-    //METODO POST
+
+    // METODO POST
+    // @PostMapping("/{id}/nuevoProyecto")
+    // public ResponseEntity<Map<String, String>> saveProyecto(@RequestBody Proyecto
+    // proyecto, @PathVariable Long id){
+
+    // Boolean validarProyecto =
+    // proyectoServicesImp.validarProectoExistente(proyecto);
+
+    // Map<String, String> response = new HashMap<>();
+
+    // if(!validarProyecto){
+    // Cliente cliente = proyectoServicesImp.registrarProyectoById(proyecto, id);
+    // List<Proyecto> proyectosCliente = cliente.getProyectosList();
+    // Proyecto proyectoGuardado = proyectosCliente.get(proyectosCliente.size()-1);
+    // response.put("message", "El proyecto se ha guardado exitosamente. Se ha
+    // guardado en el cliente con email: " + proyectoGuardado.getEmailCliente());
+    // return ResponseEntity.ok(response);
+    // }
+    // Proyecto proyectoExistente =
+    // proyectoServicesImp.getProyectoByNumeroContrato(proyecto.getNumeroContrato());
+    // response.put("message", "El número de contrato que deseas guardar ya existe
+    // en la base de datos de proyectos y pertenece al cliente con email: " +
+    // proyectoExistente.getEmailCliente());
+    // return ResponseEntity.badRequest().body(response);
+    // }
     @PostMapping("/{id}/nuevoProyecto")
-    public ResponseEntity<Map<String, String>> saveProyecto(@RequestBody Proyecto proyecto, @PathVariable Long id){
-        
+    public ResponseEntity<Proyecto> saveProyecto(@RequestBody Proyecto proyecto, @PathVariable Long id) {
         Boolean validarProyecto = proyectoServicesImp.validarProectoExistente(proyecto);
 
-        Map<String, String> response = new HashMap<>();
-
-        if(!validarProyecto){
+        if (!validarProyecto) {
             Cliente cliente = proyectoServicesImp.registrarProyectoById(proyecto, id);
             List<Proyecto> proyectosCliente = cliente.getProyectosList();
-            Proyecto proyectoGuardado = proyectosCliente.get(proyectosCliente.size()-1);
-            response.put("message", "El proyecto se ha guardado exitosamente. Se ha guardado en el cliente con email: " + proyectoGuardado.getEmailCliente());
-            return ResponseEntity.ok(response);
+            Proyecto proyectoGuardado = proyectosCliente.get(proyectosCliente.size() - 1);
+            return ResponseEntity.ok().body(proyectoGuardado);
         }
         Proyecto proyectoExistente = proyectoServicesImp.getProyectoByNumeroContrato(proyecto.getNumeroContrato());
-        response.put("message", "El número de contrato que deseas guardar ya existe en la base de datos de proyectos y pertenece al cliente con email: " + proyectoExistente.getEmailCliente());
-        return ResponseEntity.badRequest().body(response);
+        return ResponseEntity.badRequest().body(proyectoExistente);
     }
 
-    //METODO PUT
+    // METODO PUT
     @PatchMapping("/{proyectoId}/editarProyecto")
-    public ResponseEntity<String> upDateProyecto(@PathVariable Long proyectoId, @RequestBody Proyecto proyecto){
+    public ResponseEntity<String> upDateProyecto(@PathVariable Long proyectoId, @RequestBody Proyecto proyecto) {
         proyectoServicesImp.actualizarProyecto(proyecto, proyectoId);
         return ResponseEntity.ok("El proyecto se actualizado exitosamente");
     }
-
 
 }
