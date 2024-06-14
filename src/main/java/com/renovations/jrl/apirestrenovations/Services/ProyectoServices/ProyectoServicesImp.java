@@ -68,6 +68,7 @@ public class ProyectoServicesImp implements ProyectoServices {
         return cliente;
     }
 
+    @Transactional
     @Override
     public Proyecto actualizarProyecto(Proyecto proyecto, Long proyectoId) {
         Proyecto proyectoSinActualizar = proyectoRepository.findByProyectoId(proyectoId);

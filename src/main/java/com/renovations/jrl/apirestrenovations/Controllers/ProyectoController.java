@@ -1,6 +1,8 @@
 package com.renovations.jrl.apirestrenovations.Controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -52,18 +54,22 @@ public class ProyectoController {
     
     //METODO POST
     @PostMapping("/{id}/nuevoProyecto")
-    public String saveProyecto(@RequestBody Proyecto proyecto, @PathVariable Long id){
+    public ResponseEntity<Map<String, String>> saveProyecto(@RequestBody Proyecto proyecto, @PathVariable Long id){
         
         Boolean validarProyecto = proyectoServicesImp.validarProectoExistente(proyecto);
+
+        Map<String, String> response = new HashMap<>();
 
         if(!validarProyecto){
             Cliente cliente = proyectoServicesImp.registrarProyectoById(proyecto, id);
             List<Proyecto> proyectosCliente = cliente.getProyectosList();
             Proyecto proyectoGuardado = proyectosCliente.get(proyectosCliente.size()-1);
-            return "el proyecto se aguardado exitosamente. Se a guardado en el cliente con email: "+proyectoGuardado.getEmailCliente();
+            response.put("message", "El proyecto se ha guardado exitosamente. Se ha guardado en el cliente con email: " + proyectoGuardado.getEmailCliente());
+            return ResponseEntity.ok(response);
         }
         Proyecto proyectoExistente = proyectoServicesImp.getProyectoByNumeroContrato(proyecto.getNumeroContrato());
-        return "el numero de contrato que desas guardar ya existe en la base de datos de proyectos. y pertenece al cliente con email: "+proyectoExistente.getEmailCliente();
+        response.put("message", "El número de contrato que deseas guardar ya existe en la base de datos de proyectos y pertenece al cliente con email: " + proyectoExistente.getEmailCliente());
+        return ResponseEntity.badRequest().body(response);
     }
 
     //METODO PUT
