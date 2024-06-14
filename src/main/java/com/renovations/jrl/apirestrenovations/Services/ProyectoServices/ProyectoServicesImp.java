@@ -72,11 +72,21 @@ public class ProyectoServicesImp implements ProyectoServices {
     public Proyecto actualizarProyecto(Proyecto proyecto, Long proyectoId) {
         Proyecto proyectoSinActualizar = proyectoRepository.findByProyectoId(proyectoId);
         
-        proyectoSinActualizar.setFecha_estimado(proyecto.getFecha_estimado());
-        proyectoSinActualizar.setFecha_inicio(proyecto.getFecha_inicio());
-        proyectoSinActualizar.setContratante(proyecto.getContratante());
-        proyectoSinActualizar.setValor_aprovado(proyecto.getValor_aprovado());
-        proyectoSinActualizar.setFechaDePago_velorAprovado(proyecto.getFechaDePago_velorAprovado());
+        if(proyecto.getFecha_estimado()!=null && !proyecto.getFecha_estimado().isEmpty()){
+            proyectoSinActualizar.setFecha_estimado(proyecto.getFecha_estimado());
+        }
+        if(proyecto.getFecha_inicio()!=null && !proyecto.getFecha_inicio().isEmpty()){
+            proyectoSinActualizar.setFecha_inicio(proyecto.getFecha_inicio());
+        }
+        if(proyecto.getContratante()!=null && !proyecto.getContratante().isEmpty()){
+            proyectoSinActualizar.setContratante(proyecto.getContratante());
+        }
+        if(proyecto.getValor_aprovado()!=null && !proyecto.getValor_aprovado().isEmpty()){
+            proyectoSinActualizar.setValor_aprovado(proyecto.getValor_aprovado());
+        }
+        if(proyecto.getFechaDePago_velorAprovado()!=null && !proyecto.getFechaDePago_velorAprovado().isEmpty()){
+            proyectoSinActualizar.setFechaDePago_velorAprovado(proyecto.getFechaDePago_velorAprovado());
+        }       
 
         proyectoRepository.save(proyectoSinActualizar);
         return proyectoSinActualizar;
