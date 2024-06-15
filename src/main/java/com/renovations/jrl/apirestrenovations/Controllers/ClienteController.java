@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -65,11 +66,11 @@ public class ClienteController {
     }
 
     //METODO PUT
-    @PutMapping("/actualizar/{id}")
+    @PatchMapping("/actualizar/{id}")
     public Cliente updateCliente(@PathVariable Long id, @RequestBody Cliente cliente) throws ClienteNoFundException{
         return serviceClienteImpl.actualizarCliente(id, cliente);
     }
-
+    
     //METODO DELETE
     @DeleteMapping("/eliminar/{id}")
     public String deleteCliente(@PathVariable Long id){

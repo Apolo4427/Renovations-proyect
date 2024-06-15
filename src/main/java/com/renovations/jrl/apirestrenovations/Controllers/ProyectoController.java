@@ -93,9 +93,10 @@ public class ProyectoController {
 
     // METODO PUT
     @PatchMapping("/{proyectoId}/editarProyecto")
-    public ResponseEntity<String> upDateProyecto(@PathVariable Long proyectoId, @RequestBody Proyecto proyecto) {
+    public ResponseEntity<Proyecto> upDateProyecto(@PathVariable Long proyectoId, @RequestBody Proyecto proyecto) {
         proyectoServicesImp.actualizarProyecto(proyecto, proyectoId);
-        return ResponseEntity.ok("El proyecto se actualizado exitosamente");
+        Proyecto proyectoActualizado = proyectoServicesImp.getProyectoById(proyectoId);
+        return ResponseEntity.ok().body(proyectoActualizado);
     }
 
 }
